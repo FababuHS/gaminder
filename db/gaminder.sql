@@ -20,19 +20,19 @@ CREATE TABLE jugador (
     apellido1 VARCHAR(40) NOT NULL,
     apellido2 VARCHAR(40),
     email VARCHAR(60) NOT NULL,
-    idioma SET('Español','Inglés','Francés','Alemán','Italiano') NOT NULL,
+    idioma SET('SPA','ENG','FRA','DEU','ITA') NOT NULL,
     cumple DATE NOT NULL,
     discord VARCHAR(40) NOT NULL,
     premium BOOLEAN,
     gmadmin BOOLEAN    
 );
 
-INSERT INTO jugador VALUES (1, 'OpPanda', '12341234', 'Alvaro', 'Fababu', 'Lopez', 'afablop555@g.educaand.es', ('Español','Inglés'),
+INSERT INTO jugador VALUES (1, 'OpPanda', 'ed2b1f468c5f915f3f1cf75d7068baae', 'Alvaro', 'Fababu', 'Lopez', 'afablop555@g.educaand.es', 'SPA,ENG',
 	'1991-06-22', 'Fababu#3223', true, true);
-INSERT INTO jugador VALUES (2, 'Roski', '12341234', 'Pablo', 'Ros', 'Ortega', 'roski@gmail.com', ('Español','Inglés','Alemán'),
+INSERT INTO jugador VALUES (2, 'Roski', 'ed2b1f468c5f915f3f1cf75d7068baae', 'Pablo', 'Ros', 'Ortega', 'roski@gmail.com', 'SPA,ENG,DEU',
 	'1991-05-30', 'Roski#1234', true, true);
-INSERT INTO jugador VALUES (3, 'Moh4ever', '12341234', 'David', 'Escoriza', 'Martinez', 'descmar111@g.educaand.es', ('Español', 'Inglés', 'Francés'),
-	'1989-10-20', 'Davidole#5555', true, false);
+INSERT INTO jugador VALUES (3, 'Moh4ever', 'ed2b1f468c5f915f3f1cf75d7068baae', 'David', 'Escoriza', 'Martinez', 'descmar111@g.educaand.es', 'SPA',
+	'1989-10-20', 'Davidole#5555', true, false); 
     
 CREATE TABLE rol (
 	id_rol INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

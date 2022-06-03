@@ -16,33 +16,32 @@ $username = $password = "";
 $username_err = $password_err = $login_err = "";
  
 // Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if(!empty($_POST)){
  
+    // Sanity the recieved parameters
+    $username = mysqli_real_escape_string($link, $_POST['username']);
+    $password = mysqli_real_escape_string($link, $_POST['password']);
+
+
     // Check if username is empty
-    if(empty(trim($_POST["username"]))){
+    if(empty(trim($username))){
         $username_err = "Please enter username.";
-    } else{
-        $username = trim($_POST["username"]);
-    }
+    } 
     
     // Check if password is empty
-    if(empty(trim($_POST["password"]))){
+    if(empty(trim($password))){
         $password_err = "Please enter your password.";
-    } else{
-        $password = trim($_POST["password"]);
-    }
+    } 
     
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id_player, username, password FROM player WHERE username = ?";
+        $sql = "SELECT id_jugador, pass FROM jugador WHERE login = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
-            // Set parameters
-            $param_username = $username;
+            mysqli_stmt_bind_param($stmt, "s", $username);            
+
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -52,9 +51,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $id, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
-                        if($_POST['password'] === $password){
+
+                        print_r(md5($password));
+                        print_r($hashed_password);
+
+                        if(md5($password) == $hashed_password){
                         //if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             session_start();
@@ -65,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             
                             // Redirect user to welcome page
-                            header("location: index.html");
+                            header("location: index.php");
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password1.";

@@ -1,3 +1,11 @@
+<?php
+
+include_once('helpers.php');
+
+$games = get_games();
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -121,6 +129,11 @@
 <h2>¿A que te apetece jugar hoy?</h2>
 <div id="game">
   Game:<br>
+  <?php foreach ($games as $game): ?>
+    <input type="radio" id="lol" onclick="myFunction()" name="game" value="<?php echo $game['nombre_juego'];?>">
+    <label for="lol"><?php echo $game['nombre_juego'];?></label></br>
+  <?php endforeach; ?>
+
   <input type="radio" id="lol" onclick="myFunction()" name="game" value="Lol">
   <label for="lol">League of Legends</label></br>
   <input type="radio" id="ow" onclick="anotherFunction()" name="game" value="Ow">

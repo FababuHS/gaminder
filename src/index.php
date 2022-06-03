@@ -1,4 +1,13 @@
-
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(!isset($_SESSION["loggedin"])){
+    header("location: login.php");
+    exit;
+}
+?>
   <!DOCTYPE html>
   <html lang="en">
     <head>
