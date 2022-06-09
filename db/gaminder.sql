@@ -116,6 +116,7 @@ CREATE TABLE gmatch (
 	id_match INT UNSIGNED NOT NULL PRIMARY KEY,
     id_jugador_uno INT UNSIGNED NOT NULL,
     id_jugador_dos INT UNSIGNED,
+    id_match_juego INT UNSIGNED NOT NULL,
     fechamatch DATETIME NOT NULL,
     estado BOOLEAN,
     val_jugador_uno ENUM ('1','2','3','4','5'),
@@ -125,5 +126,9 @@ CREATE TABLE gmatch (
     FOREIGN KEY (id_jugador_uno) REFERENCES jugador (id_jugador),
     FOREIGN KEY (id_jugador_dos) REFERENCES jugador (id_jugador),
     FOREIGN KEY (rol_jugador_uno) REFERENCES rol (id_rol),
-    FOREIGN KEY (rol_jugador_dos) REFERENCES rol (id_rol)
+    FOREIGN KEY (rol_jugador_dos) REFERENCES rol (id_rol),
+    FOREIGN KEY (id_match_juego) REFERENCES juego (id_juego)
 );
+
+INSERT INTO gmatch VALUES (1, 1, NULL, 1, '2022-06-09', 0, NULL, NULL, 4, 5);
+INSERT INTO gmatch VALUES (2, 1, 2, 1, '2022-06-08', 1, '5', '5', 3, 2);
