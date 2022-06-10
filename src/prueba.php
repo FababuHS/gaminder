@@ -1,9 +1,8 @@
 <?php
 // including the database connection file
 include_once("config.php");
-include_once("helpers.php");
-$result = mysqli_query($link, 'SELECT id_jugador_uno, rol_jugador_uno, idioma FROM gmatch, jugador WHERE id_jugador = id_jugador_uno AND rol_jugador_dos = 5 
-    AND id_match_juego = 1');
+
+
 
 ?>
 
@@ -52,31 +51,46 @@ $result = mysqli_query($link, 'SELECT id_jugador_uno, rol_jugador_uno, idioma FR
           document.getElementById("table_result").style.display = "block";
           <?php
           $result = mysqli_query($link, "SELECT id_jugador_uno, rol_jugador_uno, idioma FROM gmatch, jugador WHERE id_jugador = id_jugador_uno AND rol_jugador_dos = 1 
-            AND id_juego = 1");
+            AND id_match_juego = 1");
+         
           ?>
+          
         }
         function tablaLolJungle() {
+          document.getElementById("table_result").style.display = "block";  
           <?php
           $result = mysqli_query($link, "SELECT id_jugador_uno, rol_jugador_uno, idioma FROM gmatch, jugador WHERE id_jugador = id_jugador_uno AND rol_jugador_dos = 2 
-            AND id_juego = 1");
+            AND id_match_juego = 1");
+         
           ?>
         }
         function tablaLolMid() {
+          document.getElementById("table_result").style.display = "block";  
           <?php
           $result = mysqli_query($link, "SELECT id_jugador_uno, rol_jugador_uno, idioma FROM gmatch, jugador WHERE id_jugador = id_jugador_uno AND rol_jugador_dos = 3 
-            AND id_juego = 1");
+            AND id_match_juego = 1");
+          
+
           ?>
+         
         }
         function tablaLolBot() {
+          document.getElementById("table_result").style.display = "block";  
           <?php
           $result = mysqli_query($link, "SELECT id_jugador_uno, rol_jugador_uno, idioma FROM gmatch, jugador WHERE id_jugador = id_jugador_uno AND rol_jugador_dos = 4 
-            AND id_juego = 1");
-          
+            AND id_match_juego = 1");
+         
           ?>
+           
         }
         function tablaLolSupp() {
           document.getElementById("table_result").style.display = "block";  
-          
+          <?php
+          $result = mysqli_query($link, "SELECT id_jugador_uno, rol_jugador_uno, idioma FROM gmatch, jugador WHERE id_jugador = id_jugador_uno AND rol_jugador_dos = 5
+          AND id_match_juego = 1");
+         
+          ?>
+         
           
         }
 </script>
@@ -90,26 +104,26 @@ $result = mysqli_query($link, 'SELECT id_jugador_uno, rol_jugador_uno, idioma FR
 	<h2>¿A que te apetece jugar hoy?</h2>
 <div id="game">
   Game:<br>  
-  <input type="radio" id="lol" onclick="myFunction()" name="game" value="Lol">
+  <input type="radio" id="lol" onclick="myFunction()" name="game" value="1">
   <label for="lol">League of Legends</label></br>
-  <input type="radio" id="ow" onclick="anotherFunction()" name="game" value="Ow">
+  <input type="radio" id="ow" onclick="anotherFunction()" name="game" value="3">
   <label for="lol">Overwatch</label></br>
-  <input type="radio" id="val" onclick="andAnotherOne()" name="game" value="Val">
+  <input type="radio" id="val" onclick="andAnotherOne()" name="game" value="2">
   <label for="lol">Valorant</label></br>  
 </div>
 <br><br><br><br>
 <div id="lol_role" display="none" style="display:none">
   <h2> ¿Que rol quieres jugar? </h2>  
   Role:<br>
-  <input type="radio" id="lol_top" onclick="tablaLolTop()" name="lol_role" value="Top">
+  <input type="radio" id="lol_top" onclick="tablaLolTop()" name="lol_role" value="1">
   <label for="lol">Top</label></br>
-  <input type="radio" id="lol_jungle" name="lol_role" value="Jungle">
+  <input type="radio" id="lol_jungle" onclick="tablaLolJungle()" name="lol_role" value="2">
   <label for="lol">Jungle</label></br>
-  <input type="radio" id="lol_mid" name="lol_role" value="Mid">
+  <input type="radio" id="lol_mid" onclick="tablaLolMid()" name="lol_role" value="3">
   <label for="lol">Mid</label></br>
-  <input type="radio" id="lol_bot" name="lol_role" value="Bot">
+  <input type="radio" id="lol_bot" onclick="tablaLolBot()" name="lol_role" value="4">
   <label for="lol">Bot</label></br>
-  <input type="radio" id="lol_support" onclick="tablaLolSupp();get_matches_lol();" name="lol_role" value="Support">
+  <input type="radio" id="lol_support" onclick="tablaLolSupp()" name="lol_role" value="5">
   <label for="lol">Support</label></br>
 </div>
 <br><br><br><br>
@@ -147,6 +161,10 @@ $result = mysqli_query($link, 'SELECT id_jugador_uno, rol_jugador_uno, idioma FR
 	</tr>
 
 	<?php
+
+  echo "MAIN";
+  print_r($result);
+
 	while($row = mysqli_fetch_array($result)) {
 		echo "<tr>\n";
 		echo "<td>".$row['id_jugador_uno']."</td>\n";

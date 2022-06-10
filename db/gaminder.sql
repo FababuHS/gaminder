@@ -113,7 +113,7 @@ INSERT INTO jugador_val VALUES (2, 'PaulR#2222', 8);
 INSERT INTO jugador_val VALUES (3, 'Dvd#6789', 9);
 
 CREATE TABLE gmatch (
-	id_match INT UNSIGNED NOT NULL PRIMARY KEY,
+	id_match INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     id_jugador_uno INT UNSIGNED NOT NULL,
     id_jugador_dos INT UNSIGNED,
     id_match_juego INT UNSIGNED NOT NULL,
