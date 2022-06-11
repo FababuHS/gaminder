@@ -1,77 +1,41 @@
 <?php
-// including the database connection file
-include_once("config.php");
+include_once("helpers.php");
+
+$games = get_games_and_roles();
+
+//echo "<pre>";
+//print_r($games_and_roles);
+//echo "</pre>";
 
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <title>Homepage</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" crossorigin="anonymous">
 
   <script>
-    function myFunction() {
-      document.getElementById("lol_role").style.display = "block";
-      document.getElementById("ow_role").style.display = "none";
-      document.getElementById("val_role").style.display = "none";
-      document.getElementById("lol_role_you").style.display = "none";
-      document.getElementById("lol_top_div").style.display = "none";
-      document.getElementById("lol_jgl_div").style.display = "none";
-      document.getElementById("lol_mid_div").style.display = "none";
-      document.getElementById("lol_bot_div").style.display = "none";
-      document.getElementById("lol_supp_div").style.display = "none";
+    function showRolesForGame(id_match_juego) {
+      //alert(document.querySelector('input[name="game"]:checked').value);
+
+      // Ocultamos todos los roles
+      let roles = Array.from(document.getElementsByClassName("roles"));
+      roles.forEach(element => element.style.display = "none");
+
+      // Sólo mostramos el rol que recibimos como parámetro
+      document.getElementById(id_match_juego).style.display = "block";
+
+      // Eliminamos el contenido de la tabla
+      clearGmatchTable();      
     }
 
-    function anotherFunction() {
-      document.getElementById("lol_role").style.display = "none";
-      document.getElementById("ow_role").style.display = "block";
-      document.getElementById("val_role").style.display = "none";
-      document.getElementById("lol_role_you").style.display = "none";
-      document.getElementById("lol_top_div").style.display = "none";
-      document.getElementById("lol_jgl_div").style.display = "none";
-      document.getElementById("lol_mid_div").style.display = "none";
-      document.getElementById("lol_bot_div").style.display = "none";
-      document.getElementById("lol_supp_div").style.display = "none";
-    }
-
-    function andAnotherOne() {
-      document.getElementById("lol_role").style.display = "none";
-      document.getElementById("ow_role").style.display = "none";
-      document.getElementById("val_role").style.display = "block";
-      document.getElementById("lol_role_you").style.display = "none";
-      document.getElementById("lol_top_div").style.display = "none";
-      document.getElementById("lol_jgl_div").style.display = "none";
-      document.getElementById("lol_mid_div").style.display = "none";
-      document.getElementById("lol_bot_div").style.display = "none";
-      document.getElementById("lol_supp_div").style.display = "none";
-    }
-
-    function tablaLolTop() {
-      document.getElementById("table_result").style.display = "block";
-      loadGmatchTable(1, 1);
-    }
-
-    function tablaLolJungle() {
-      document.getElementById("table_result").style.display = "block";
-      loadGmatchTable(1, 2);
-    }
-
-    function tablaLolMid() {
-      document.getElementById("table_result").style.display = "block";
-      loadGmatchTable(1, 3);
-    }
-
-    function tablaLolBot() {
-      document.getElementById("table_result").style.display = "block";
-      loadGmatchTable(1, 4);
-    }
-
-    function tablaLolSupp() {
-      document.getElementById("table_result").style.display = "block";
-      loadGmatchTable(1, 5);
+    function loadAndShowGmatchTable(id_match_juego, rol_jugador_dos) {
+      // Cargamos los datos de la tabla
+      loadGmatchTable(id_match_juego, rol_jugador_dos);
+      // Mostramos la tabla
+      document.getElementById("table_result").style.display = "block";      
     }
 
     function loadGmatchTable(id_match_juego, rol_jugador_dos) {
@@ -86,11 +50,7 @@ include_once("config.php");
           console.log(data);
 
           // Eliminamos las filas previas que existan en la tabla
-          let table = document.getElementById("table");
-          let numRows = table.rows.length;
-          while (table.rows.length > 1) {
-            table.deleteRow(1);
-          }
+          clearGmatchTable();
 
           // Creamos las filas de la tabla a partir de los datos del JSON
           let header_row = document.getElementById('header_row');
@@ -109,6 +69,15 @@ include_once("config.php");
           console.log("Error: " + error.message);
         })
     }
+
+    function clearGmatchTable() {
+      // Eliminamos las filas previas que existan en la tabla
+      let table = document.getElementById("table");
+      let numRows = table.rows.length;
+      while (table.rows.length > 1) {
+        table.deleteRow(1);
+      }
+    }
   </script>
 </head>
 
@@ -118,57 +87,35 @@ include_once("config.php");
       <h1 class="display-4">Simple LAMP web app</h1>
       <p class="lead">Demo app</p>
     </div>
-    <h2>¿A que te apetece jugar hoy?</h2>
+    <h2>¿A qué te apetece jugar hoy?</h2>
     <div id="game">
       Game:<br>
-      <input type="radio" id="lol" onclick="myFunction()" name="game" value="1">
-      <label for="lol">League of Legends</label></br>
-      <input type="radio" id="ow" onclick="anotherFunction()" name="game" value="3">
-      <label for="lol">Overwatch</label></br>
-      <input type="radio" id="val" onclick="andAnotherOne()" name="game" value="2">
-      <label for="lol">Valorant</label></br>
+    
+      <!-- Mostramos la lista de juegos -->
+      <?php foreach ($games as $game) : ?>
+        <input type="radio" onclick="showRolesForGame('roles_game_<?php echo $game['id_juego'];?>')" name="game">
+        <label><?php echo $game['nombre_juego'];?></label></br>
+      <?php endforeach; ?>
+
     </div>
     <br><br>
-    <div id="lol_role" display="none" style="display:none">
-      <h2> ¿Que rol quieres jugar? </h2>
-      Role:<br>
-      <input type="radio" id="lol_top" onclick="tablaLolTop()" name="lol_role" value="1">
-      <label for="lol">Top</label></br>
-      <input type="radio" id="lol_jungle" onclick="tablaLolJungle()" name="lol_role" value="2">
-      <label for="lol">Jungle</label></br>
-      <input type="radio" id="lol_mid" onclick="tablaLolMid()" name="lol_role" value="3">
-      <label for="lol">Mid</label></br>
-      <input type="radio" id="lol_bot" onclick="tablaLolBot()" name="lol_role" value="4">
-      <label for="lol">Bot</label></br>
-      <input type="radio" id="lol_support" onclick="tablaLolSupp()" name="lol_role" value="5">
-      <label for="lol">Support</label></br>
-    </div>
-    <div id="ow_role" display="none" style="display:none">
-      <h2> ¿Que rol quieres jugar? </h2>
-      Role:<br>
-      <input type="radio" id="ow_dps" name="ow_role" value="Dps">
-      <label for="ow">Damage Dealer</label></br>
-      <input type="radio" id="ow_tank" name="ow_role" value="Tank">
-      <label for="ow">Tank</label></br>
-      <input type="radio" id="ow_support" name="ow_role" value="Support">
-      <label for="ow">Support</label></br>
-    </div>
-    <div id="val_role" display="none" style="display:none">
-      <h2> ¿Que rol quieres jugar? </h2>
-      Role:<br>
-      <input type="radio" id="val_duel" name="val_role" value="Duelist">
-      <label for="val">Duelist</label></br>
-      <input type="radio" id="val_init" name="val_role" value="Initiator">
-      <label for="val">Initiator</label></br>
-      <input type="radio" id="val_cont" name="val_role" value="Controller">
-      <label for="val">Controller</label></br>
-      <input type="radio" id="val_sent" name="val_role" value="Sentinel">
-      <label for="val">Sentinel</label></br>
-    </div>
+
+    <!-- Mostramos la lista de roles de cada juego -->
+    <?php foreach ($games as $game) : ?>
+      <div id="roles_game_<?php echo $game['id_juego']; ?>" class="roles" display="none" style="display:none">
+        <h2> ¿Qué rol quieres jugar? </h2>
+        Role:<br>
+        <!-- Mostramos la lista de roles de cada juego -->
+        <?php foreach ($game['roles'] as $rol) : ?>
+          <input type="radio" onclick="loadAndShowGmatchTable(<?php echo $game['id_juego'];?>,<?php echo $rol['id_rol'];?>)" name="role">
+          <label><?php echo $rol['nombre_rol']; ?></label></br>
+        <?php endforeach; ?>
+      </div>
+    <?php endforeach; ?>
+
     <br><br>
     <div id="table_result" display="none" style="display:none">
       <table width='80%' border=0 class="table" id="table">
-
         <tr bgcolor='#CCCCCC' id="header_row">
           <td>Player</td>
           <td>Rol</td>
@@ -179,5 +126,4 @@ include_once("config.php");
     </div>
   </div>
 </body>
-
 </html>
