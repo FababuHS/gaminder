@@ -61,10 +61,10 @@ if(!isset($_SESSION["loggedin"])){
   
       <!-- Links section 1. Replace the # inside of the "" with your links. -->
       <div class="links-container">
-        <a href="buscarmatch.html" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;"></i>Buscar un match</a>
-        <a href="#" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;" target="_blank"></i>Matches recientes</a>
-        <a href="#" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;" target="_blank"></i>Editar perfil</a>
-        <a href="logout.php" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;" target="_blank"></i>Logout</a>
+        <a href="prueba.php" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;"></i>Buscar un match</a>
+        <a href="buscarmatch2.html" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;"></i>Crear un match</a>
+        <a href="completed.php" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;"></i>Historial de matches</a>
+        <a href="logout.php" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;"></i>Logout</a>
       </div>
   
         <!-- Add links to your social networks here. -->
