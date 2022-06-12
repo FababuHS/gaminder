@@ -64,6 +64,7 @@ if(!isset($_SESSION["loggedin"])){
         <a href="buscarmatch.html" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;"></i>Buscar un match</a>
         <a href="#" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;" target="_blank"></i>Matches recientes</a>
         <a href="#" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;" target="_blank"></i>Editar perfil</a>
+        <a href="logout.php" class="w3-button w3-hover-blue w3-large w3-black" style="width: 350px;" target="_blank"></i>Logout</a>
       </div>
   
         <!-- Add links to your social networks here. -->

@@ -1,4 +1,13 @@
 <?php
+// Initialize the session
+session_start();
+
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(!isset($_SESSION["loggedin"])){
+    header("location: login.php");
+    exit;
+}
+
 include_once("helpers.php");
 
 $games = get_games_and_roles();
@@ -14,7 +23,7 @@ $games = get_games_and_roles();
 <head>
   <meta charset="UTF-8">
   <title>Homepage</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" crossorigin="anonymous">
 
   <script>
     function showRolesForGame(id_match_juego) {
@@ -40,7 +49,7 @@ $games = get_games_and_roles();
 
     function loadGmatchTable(id_match_juego, rol_jugador_dos) {
       // Creamos la URL de la API con los parámetros de entrada
-      let url = "api/index.php?id_match_juego=" + id_match_juego + "&rol_jugador_dos=" + rol_jugador_dos;
+      let url = "api/index.php?action=pending&id_match_juego=" + id_match_juego + "&rol_jugador_dos=" + rol_jugador_dos;
 
       // Hacmos una consulta a la API
       fetch(url)
@@ -56,10 +65,10 @@ $games = get_games_and_roles();
           let header_row = document.getElementById('header_row');
           data.forEach(element => header_row.insertAdjacentHTML('afterend',
             `<tr>
-               <td>${element.id_jugador_uno}</td>
-               <td>${element.rol_jugador_uno}</td>
+               <td>${element.discord}</td>
+               <td>${element.nombre_rol}</td>
                <td>${element.idioma}</td>
-               <td><a href="add.php" class="btn btn-primary">MATCH!</a></td>
+               <td><a href="match.php?id_match=${element.id_match}" class="btn btn-primary">MATCH!</a></td>
               </tr>`));
 
           // Referencia:
@@ -82,11 +91,22 @@ $games = get_games_and_roles();
 </head>
 
 <body>
-  <div class="container">
-    <div class="jumbotron">
-      <h1 class="display-4">Simple LAMP web app</h1>
-      <p class="lead">Demo app</p>
-    </div>
+  <div class="col-lg-8 mx-auto py-md-5">
+    <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+		  <a href="/" class="text-dark text-decoration-none">
+				<img src="https://i.imgur.com/JMcQzYk.jpg" width="40" height="32" class="me-2">
+				<span class="fs-4">Gaminder</span>
+			</a>
+		</header>      
+
+    <ul class="nav nav-tabs">
+	    <li class="nav-item"><a href="index.php" class="nav-link" >Home</a></li>
+	    <li class="nav-item "><a href="prueba.php" class="nav-link active">Buscar Match</a></li>	
+	    <li class="nav-item"><a href="completed.php" class="nav-link" >Historial</a></li>
+	    <li class="nav-item"><a href="logout.php" class="nav-link" >Logout</a></li>
+    </ul>
+    <br/>
+
     <h2>¿A qué te apetece jugar hoy?</h2>
     <div id="game">
       Game:<br>
@@ -115,9 +135,9 @@ $games = get_games_and_roles();
 
     <br><br>
     <div id="table_result" display="none" style="display:none">
-      <table width='80%' border=0 class="table" id="table">
+      <table id="table" class="table table-striped table-hover align-middle">
         <tr bgcolor='#CCCCCC' id="header_row">
-          <td>Player</td>
+          <td>Player (Discord)</td>
           <td>Rol</td>
           <td>Idioma</td>
           <td></td>
