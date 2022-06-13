@@ -102,7 +102,7 @@ $games = get_games_and_roles();
     </ul>
     <br/>
 
-    <h2>Histórido de matches en el juego</h2>
+    <h2>Histórico de matches en el juego</h2>
     <div id="game">
     Game:<br>
     
