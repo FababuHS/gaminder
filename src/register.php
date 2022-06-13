@@ -15,7 +15,7 @@
 			</a>
 		</header>      
 
-    <form action="register.php" method="post">
+    <form action="register2.php" method="post">
 	<div class="mb-3">
 		<label for="username">Username</label>
 		<input type="text" class="form-control" name="username" required>
@@ -50,7 +50,10 @@
 		<label for="idioma">Language</label>
         <select class="form-select" multiple name="idioma" required>
             <option value="SPA" selected>Spanish</option>
-            <option value="EN">English</option>
+            <option value="ENG">English</option>
+			<option value="FRA">French</option>
+			<option value="DEU">Deutsch</option>
+			<option value="ITA">Italian</option>
         </select>
     </div>
 
