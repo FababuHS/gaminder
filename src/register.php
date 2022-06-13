@@ -48,7 +48,7 @@
 
 	<div class="mb-3">
 		<label for="idioma">Language</label>
-        <select class="form-select" multiple name="idioma" required>
+        <select class="form-select" multiple name="idioma[]" required>
             <option value="SPA" selected>Spanish</option>
             <option value="ENG">English</option>
 			<option value="FRA">French</option>

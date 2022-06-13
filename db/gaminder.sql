@@ -14,15 +14,15 @@ INSERT INTO juego VALUES (3, 'Overwatch', 'Blizzard Activision');
 
 CREATE TABLE jugador (
 	id_jugador INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    login VARCHAR(40) NOT NULL,
+    login VARCHAR(40) UNIQUE NOT NULL,
     pass VARCHAR(255) NOT NULL,    
     nombre_jugador VARCHAR(40) NOT NULL,    
     apellido1 VARCHAR(40) NOT NULL,
     apellido2 VARCHAR(40),
-    email VARCHAR(60) NOT NULL,
+    email VARCHAR(60) UNIQUE NOT NULL,
     idioma SET('SPA','ENG','FRA','DEU','ITA') NOT NULL,
     cumple DATE NOT NULL,
-    discord VARCHAR(40) NOT NULL,
+    discord VARCHAR(40) UNIQUE NOT NULL,
     premium BOOLEAN,
     gmadmin BOOLEAN    
 );
