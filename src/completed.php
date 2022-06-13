@@ -96,8 +96,9 @@ $games = get_games_and_roles();
     
     <ul class="nav nav-tabs">
 	    <li class="nav-item"><a href="index.php" class="nav-link" >Home</a></li>
-	    <li class="nav-item "><a href="prueba.php" class="nav-link">Buscar Match</a></li>	
-	    <li class="nav-item"><a href="completed.php" class="nav-link active">Historial</a></li>
+	    <li class="nav-item "><a href="creatematch.form.php" class="nav-link">Crear Match</a></li>
+	    <li class="nav-item "><a href="buscarmatch.php" class="nav-link">Buscar Match</a></li>	
+	    <li class="nav-item"><a href="completed.php" class="nav-link active" >Historial</a></li>
 	    <li class="nav-item"><a href="logout.php" class="nav-link" >Logout</a></li>
     </ul>
     <br/>
@@ -138,6 +139,11 @@ $games = get_games_and_roles();
         </tr>
       </table>
     </div>
-  </div>
+
+
+    <footer class="pt-5 my-5 text-muted border-top">
+    Gaminder &copy; 2022
+  </footer>
+</div>
 </body>
 </html>

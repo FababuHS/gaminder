@@ -54,8 +54,8 @@ if(!empty($_POST)){
                     mysqli_stmt_bind_result($stmt, $id, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
 
-                        print_r(md5($password));
-                        print_r($hashed_password);
+                        //print_r(md5($password));
+                        //print_r($hashed_password);
 
                         if(md5($password) == $hashed_password){
                         //if(password_verify($password, $hashed_password)){
@@ -93,18 +93,38 @@ if(!empty($_POST)){
 ?>
  
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; }
+  <meta charset="UTF-8">
+  <title>Buscar Match</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <style>
         .wrapper{ width: 360px; padding: 20px; }
     </style>
 </head>
+
 <body>
-    <div class="wrapper">
+  <div class="col-lg-8 mx-auto py-md-5">
+    <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+		  <a href="/" class="text-dark text-decoration-none">
+				<img src="https://i.imgur.com/JMcQzYk.jpg" width="40" height="32" class="me-2">
+				<span class="fs-4">Gaminder</span>
+			</a>
+    </header>      
+
+    <?php if ($status == "error") : ?>
+    <div class="alert alert-danger" role="alert">
+      <?php echo $message; ?>
+   </div>
+   <?php endif; ?>
+
+   <?php if ($status == "success") : ?>
+   <div class="alert alert-success" role="alert">
+	   <?php echo $message; ?>
+   </div>
+   <?php endif; ?>
+
+   <div class="wrapper">
         <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
 
@@ -114,22 +134,30 @@ if(!empty($_POST)){
         }        
         ?>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+        <form action="login.php" method="post">
+            <div class="mb-3">
+		        <label for="username">Username</label>
+		        <input type="text" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" name="username">
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+	        </div>
+
+	        <div class="mb-3">
+		        <label for="password">Password</label>
+		        <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" name="password">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
+	        </div>
+
+	        <div class="mb-3">
+		        <input type="submit" value="Submit" class="form-control btn btn-primary">
+	        </div>
+
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
         </form>
     </div>
+
+   <footer class="pt-5 my-5 text-muted border-top">
+    Gaminder &copy; 2022
+  </footer>
+</div>
 </body>
 </html>
