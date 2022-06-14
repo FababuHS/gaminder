@@ -138,10 +138,10 @@ $games = get_games_and_roles();
     <div id="table_result" display="none" style="display:none">
       <table id="table" class="table table-striped table-hover align-middle">
         <tr bgcolor='#CCCCCC' id="header_row">
-          <td>Player (Discord)</td>
-          <td>Rol</td>
-          <td>Idioma</td>
-          <td></td>
+          <th>Player (Discord)</th>
+          <th>Rol</th>
+          <th>Idioma</th>
+          <th></th>
         </tr>
       </table>
     </div>

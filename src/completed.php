@@ -43,9 +43,9 @@ $games = get_games_and_roles();
       document.getElementById("table_result").style.display = "block";      
     }
 
-    function loadGmatchTable(id_match_juego, rol_jugador_dos) {
+    function loadGmatchTable(id_match_juego, rol_jugador) {
       // Creamos la URL de la API con los parámetros de entrada
-      let url = "api/index.php?action=completed&id_match_juego=" + id_match_juego + "&rol_jugador_dos=" + rol_jugador_dos;
+      let url = "api/index.php?action=completed&id_match_juego=" + id_match_juego + "&rol_jugador=" + rol_jugador;
 
       // Hacmos una consulta a la API
       fetch(url)
@@ -61,9 +61,12 @@ $games = get_games_and_roles();
           let header_row = document.getElementById('header_row');
           data.forEach(element => header_row.insertAdjacentHTML('afterend',
             `<tr>
-               <td>${element.discord}</td>
-               <td>${element.nombre_rol}</td>
-               <td>${element.idioma}</td>
+               <td>${element.jugador1_discord}</td>
+               <td>${element.jugador1_nombre_rol}</td>
+               <td>${element.jugador1_idioma}</td>
+               <td>${element.jugador2_discord}</td>
+               <td>${element.jugador2_nombre_rol}</td>
+               <td>${element.jugador2_idioma}</td>
               </tr>`));
 
           // Referencia:
@@ -131,15 +134,20 @@ $games = get_games_and_roles();
 
     <br><br>
     <div id="table_result" display="none" style="display:none">
-      <table width='80%' border=0 class="table" id="table">
-        <tr bgcolor='#CCCCCC' id="header_row">
-          <td>Player (Discord)</td>
-          <td>Rol</td>
-          <td>Idioma</td>
+      <table id="table" class="table table-striped align-middle">
+        <thead>
+        <tr bgcolor="#CCCCCC" id="header_row">
+          <th>Player 1. Discord</th>
+          <th>Rol</th>
+          <th>Idioma</th>
+          <th>Player 2. Discord</th>
+          <th>Rol</th>
+          <th>Idioma</th>
         </tr>
+        </thead>
+        <tbody></tbody>
       </table>
     </div>
-
 
     <footer class="pt-5 my-5 text-muted border-top">
     Gaminder &copy; 2022

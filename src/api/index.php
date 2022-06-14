@@ -64,24 +64,19 @@ function getCompletedMatches() {
 
     // Recibimos los parámetros por GET
     $id_match_juego = $_GET["id_match_juego"];
-    $rol_jugador_dos = $_GET["rol_jugador_dos"];    
+    $rol_jugador = $_GET["rol_jugador"];
 
     // Si los parámetros están vacíos devolvemos un mensaje de error
-    if (empty($id_match_juego) || empty($rol_jugador_dos)) {
-        echo "Los parámetros id_match_juego y rol_jugador_dos no pueden estar vacíos";
+    if (empty($id_match_juego) || empty($rol_jugador)) {
+        echo "Los parámetros id_match_juego y rol_jugador no pueden estar vacíos";
         exit;
     }
 
     // Creamos la query con los parámetros de entrada
-    $query = "SELECT gmatch.id_match, gmatch.id_jugador_uno, gmatch.rol_jugador_uno, rol.nombre_rol, jugador.discord, jugador.idioma " .
-            "FROM gmatch INNER JOIN jugador " .
-            "ON gmatch.id_jugador_uno = jugador.id_jugador " .
-            "INNER JOIN rol " .
-            "ON gmatch.rol_jugador_uno = rol.id_rol " .
-            "WHERE jugador.id_jugador = $id_jugador " . 
-            "AND gmatch.estado = 1 " .
-            "AND gmatch.id_match_juego = $id_match_juego " .
-            "AND gmatch.rol_jugador_dos = $rol_jugador_dos";
+    $query = "SELECT * FROM completed_matches " .
+            "WHERE id_match_juego = $id_match_juego " .
+            "AND ((id_jugador_uno = $id_jugador AND rol_jugador_uno = $rol_jugador) OR " .
+            "     (id_jugador_dos = $id_jugador AND rol_jugador_dos = $rol_jugador))";
 
     // Ejecutamos la query en la BD
     $result = mysqli_query($link, $query);
@@ -96,5 +91,4 @@ function getCompletedMatches() {
     $json = json_encode($response);
     echo $json;
 }
-
 ?>

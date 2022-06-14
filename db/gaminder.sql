@@ -132,3 +132,33 @@ CREATE TABLE gmatch (
 
 INSERT INTO gmatch VALUES (1, 1, NULL, 1, '2022-06-09', 0, NULL, NULL, 4, 5);
 INSERT INTO gmatch VALUES (2, 1, 2, 1, '2022-06-08', 1, '5', '5', 3, 2);
+
+
+CREATE OR REPLACE VIEW completed_matches AS
+SELECT 
+    gmatch.id_match, 
+    gmatch.id_match_juego,
+    juego.nombre_juego,
+    gmatch.id_jugador_uno,
+    jugador1.discord AS jugador1_discord, 
+    jugador1.idioma AS jugador1_idioma, 
+    gmatch.rol_jugador_uno,
+    roljugador1.nombre_rol AS jugador1_nombre_rol,
+    gmatch.id_jugador_dos,
+    jugador2.discord AS jugador2_discord, 
+    jugador2.idioma AS jugador2_idioma, 
+    gmatch.rol_jugador_dos,
+    roljugador2.nombre_rol AS jugador2_nombre_rol
+FROM 
+    gmatch INNER JOIN jugador AS jugador1
+    ON gmatch.id_jugador_uno = jugador1.id_jugador
+    INNER JOIN rol AS roljugador1
+    ON gmatch.rol_jugador_uno = roljugador1.id_rol 
+    INNER JOIN jugador AS jugador2
+    ON gmatch.id_jugador_dos = jugador2.id_jugador
+    INNER JOIN rol AS roljugador2
+    ON gmatch.rol_jugador_dos = roljugador2.id_rol
+    INNER JOIN juego 
+    ON gmatch.id_match_juego = juego.id_juego
+WHERE 
+    gmatch.estado = 1;
