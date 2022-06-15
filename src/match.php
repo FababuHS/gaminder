@@ -31,6 +31,8 @@ mysqli_query($link, $query);
 
 // Comprobamos si la operación de UPDATE se ha realizado de forma correcta
 if (mysqli_affected_rows($link) > 0) {
+    $mensaje = "Se ha encontrado un match. Visita tu historial.";
+    mail('fabluck9@gmail.com', 'Aviso de Match', $mensaje);
     $status = "success";
     $message = "El match se ha creado de forma correcta.";
 } else {
