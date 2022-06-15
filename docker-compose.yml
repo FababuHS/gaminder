@@ -7,6 +7,9 @@ services:
       - 80:80
     volumes:
       - ./src:/var/www/html
+    networks:
+      - frontend_network
+      - backend_network      
 
   mysql:
     image: mysql:8.0
@@ -20,7 +23,9 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./db:/docker-entrypoint-initdb.d       
+      - ./db:/docker-entrypoint-initdb.d
+    networks:
+      - backend_network       
 
   phpmyadmin:
     image: phpmyadmin:5
@@ -30,6 +35,30 @@ services:
       - PMA_HOST=mysql
     depends_on: 
       - mysql 
+    networks:
+      - frontend_network
+      - backend_network
+
+    https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      # DOMAINS: 'localhost -> http://localhost:80 #local'
+      DOMAINS: 'gaminder.ddns.net -> http://localhost:80 #production'
+    volumes:
+      - ssl_certs_data:/var/lib/https-portal
+    networks:
+      - frontend_network
+    depends_on:
+      - apache
+    restart: always
 
 volumes:
   mysql_data:
+  ssl_certs_data:
+
+networks:
+  frontend_network:
+  backend_network:
