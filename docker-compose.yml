@@ -41,8 +41,7 @@ services:
 
   https-portal:
     image: steveltn/https-portal:1
-    ports:
-      - 80:80
+    ports:     
       - 443:443
     environment:
       # DOMAINS: 'localhost -> http://localhost:80 #local'
