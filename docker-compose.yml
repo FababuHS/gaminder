@@ -41,7 +41,8 @@ services:
 
   https-portal:
     image: steveltn/https-portal:1
-    ports:     
+    ports:  
+      - 81:80   
       - 443:443
     environment:
       # DOMAINS: 'localhost -> http://localhost:80 #local'
@@ -52,20 +53,8 @@ services:
       - frontend_network
     depends_on:
       - apache
-    restart: always
+    restart: always  
 
-  mail:
-    image: bytemark/smtp
-    depends_on:
-      - apache
-    networks:
-      - frontend_network
-    environment:
-      RELAY_HOST: smtp-relay.gmail.com
-      RELAY_PORT: 587
-      RELAY_USERNAME: gaminderasir@gmail.com
-      RELAY_PASSWORD: Fuckingasir79!
-    restart: always
 
 
 volumes:
