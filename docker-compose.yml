@@ -39,7 +39,7 @@ services:
       - frontend_network
       - backend_network
 
-    https-portal:
+  https-portal:
     image: steveltn/https-portal:1
     ports:
       - 80:80
