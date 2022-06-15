@@ -46,7 +46,7 @@ services:
       - 443:443
     environment:
       # DOMAINS: 'localhost -> http://localhost:80 #local'
-      DOMAINS: 'gaminder.ddns.net'
+      DOMAINS: 'gaminder.ddns.net -> http://54.224.189.129:80 #production'
     volumes:
       - ssl_certs_data:/var/lib/https-portal
     networks:
