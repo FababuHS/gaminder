@@ -70,7 +70,7 @@ if(!isset($_SESSION["loggedin"])){
         <!-- Add links to your social networks here. -->
           <div class="w3-container w3-xlarge w3-padding w3-margin">            
            <i class="fa fa-instagram w3-hover-opacity"></i>
-            <a href="https://instagram.com/gaminder_official" target="_blank">           
+            <a href="https://instagram.com/gaminder_official" target="_blank">Conocenos</a>           
            
           </div>
         </div>
