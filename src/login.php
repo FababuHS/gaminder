@@ -1,56 +1,56 @@
 <?php
-// Initialize the session
+// Inicializamos la sesión
 session_start();
  
-// Check if the user is already logged in, if yes then redirect him to welcome page
+// Comprobamos si el usuario está logeado, si es así lo redirigimos a la página de inicio
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.html");
     exit;
 }
  
-// Include config file
+// Incluimos el fichero config.php
 require_once "config.php";
  
-// Define variables and initialize with empty values
+// Definos las variables y las inicializamos
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
  
-// Processing form data when form is submitted
+//Procesamos la información volcada desde el formulario
 if(!empty($_POST)){
  
-    // Sanity the recieved parameters
+    // Saneamos los parámetros recibidos
     $username = mysqli_real_escape_string($link, $_POST['username']);
     $password = mysqli_real_escape_string($link, $_POST['password']);
 
 
-    // Check if username is empty
+    // Comprobamos si se ha introducido el username
     if(empty(trim($username))){
-        $username_err = "Please enter username.";
+        $username_err = "Introduce el nombre de usuario.";
     } 
     
-    // Check if password is empty
+    // Comprobamos si se ha introducido la contraseña
     if(empty(trim($password))){
-        $password_err = "Please enter your password.";
+        $password_err = "Introduce la contraseña.";
     } 
     
-    // Validate credentials
+    // Validación de las credenciales
     if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
+        // Preparamos la query
         $sql = "SELECT id_jugador, pass FROM jugador WHERE login = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
+            // Vinculamos las variables a la query
             mysqli_stmt_bind_param($stmt, "s", $username);            
 
             
-            // Attempt to execute the prepared statement
+            // Intento de ejecución de la sentencia
             if(mysqli_stmt_execute($stmt)){
-                // Store result
+                // Almacenamos el resultado
                 mysqli_stmt_store_result($stmt);
                 
-                // Check if username exists, if yes then verify password
+                // Comprobamos si existe el usuario, si es asi validamos la contraseña
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    // Bind result variables
+                    // Vinculamos las variables del resultado
                     mysqli_stmt_bind_result($stmt, $id, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
 
@@ -59,35 +59,35 @@ if(!empty($_POST)){
 
                         if(md5($password) == $hashed_password){
                         //if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
+                            // Contraseña correcta, iniciamos sesión
                             session_start();
                             
-                            // Store data in session variables
+                            // Almacenamos información en variables de sesión
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;                            
                             
-                            // Redirect user to welcome page
+                            // Redirección del usuario a la página de inicio
                             header("location: index.php");
                         } else{
-                            // Password is not valid, display a generic error message
-                            $login_err = "Invalid username or password1.";
+                            // Contraseña incorrecta, mostrando mensaje genérico de error.
+                            $login_err = "Usuario o contraseña erronea.";
                         }
                     }
                 } else{
-                    // Username doesn't exist, display a generic error message
-                    $login_err = "Invalid username or password2.";
+                    // El usuario no existe, mostrando mensaje genérico de error.
+                    $login_err = "Usuario o contraseña erronea.";
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Oops! Algo falló durante el proceso, inténtelo de nuevo.";
             }
 
-            // Close statement
+            // Cierre de la sentencia
             mysqli_stmt_close($stmt);
         }
     }
     
-    // Close connection
+    // Cierre de la sesión
     mysqli_close($link);
 }
 ?>
@@ -126,7 +126,7 @@ if(!empty($_POST)){
 
    <div class="wrapper">
         <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
+        <p>Por favor introduzca sus credenciales.</p>
 
         <?php 
         if(!empty($login_err)){
@@ -151,7 +151,7 @@ if(!empty($_POST)){
 		        <input type="submit" value="Submit" class="form-control btn btn-primary">
 	        </div>
 
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            <p>¿No tienes una cuenta? <a href="register.php">Regístrate ahora</a>.</p>
         </form>
     </div>
 

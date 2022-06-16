@@ -27,7 +27,7 @@ $query = "INSERT INTO jugador (login, pass, nombre_jugador, apellido1, apellido2
 // Ejecutamos la query en la BD
 if (mysqli_query($link, $query)) {
    $status = "success";
-   $message =  "New record has been added successfully !";
+   $message =  "Usuario creado correctamente.";
 } else {
    $status = "error";
    $message =  "Error: " . $sql . ":-" . mysqli_error($link);
@@ -41,7 +41,7 @@ mysqli_close($link);
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Buscar Match</title>
+  <title>Registro</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" crossorigin="anonymous">
 </head>
  <body>

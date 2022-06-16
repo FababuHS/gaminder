@@ -1,8 +1,8 @@
 <?php
-// Initialize the session
+// Inicializamos la sesión
 session_start();
 
-// Check if the user is already logged in, if yes then redirect him to welcome page
+// Comprobamos si el usuario está loggeado, si es así lo redirigimos al índice
 if(!isset($_SESSION["loggedin"])){
     header("location: login.php");
     exit;

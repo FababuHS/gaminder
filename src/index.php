@@ -16,7 +16,7 @@ if(!isset($_SESSION["loggedin"])){
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syne">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <title>Links website</title>
+      <title>Índice</title>
       <style>
       
       body {
@@ -69,10 +69,9 @@ if(!isset($_SESSION["loggedin"])){
   
         <!-- Add links to your social networks here. -->
           <div class="w3-container w3-xlarge w3-padding w3-margin">            
-           <i class="fa fa-facebook-official w3-hover-opacity"></i>
-            <a href="https://instagram.com/gaminder_official" target="_blank">
-           <!-- <i class="fa fa-instagram w3-hover-opacity"></i></a> -->
-           <!-- <i class="fa fa-linkedin w3-hover-opacity"></i> -->
+           <i class="fa fa-instagram w3-hover-opacity"></i>
+            <a href="https://instagram.com/gaminder_official" target="_blank">           
+           
           </div>
         </div>
   

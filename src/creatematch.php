@@ -25,7 +25,7 @@ $query = "INSERT INTO gmatch (id_jugador_uno, id_match_juego, fechamatch, estado
 // Ejecutamos la query en la BD
 if (mysqli_query($link, $query)) {
    $status = "success";
-   $message =  "New record has been added successfully !";
+   $message =  "Nuevo match añadido correctamente!";
 } else {
    $status = "error";
    $message =  "Error: " . $sql . ":-" . mysqli_error($link);

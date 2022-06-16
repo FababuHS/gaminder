@@ -27,17 +27,17 @@
 	</div>
 
 	<div class="mb-3">
-		<label for="name">Name</label>
+		<label for="name">Nombre</label>
 		<input type="text" class="form-control" name="nombre" required>
 	</div>
 
 	<div class="mb-3">
-		<label for="name">Surname1</label>
+		<label for="name">Apellido 1</label>
 		<input type="text" class="form-control" name="apellido1" required>
 	</div>
 
 	<div class="mb-3">
-		<label for="name">Surname2</label>
+		<label for="name">Apellido 2</label>
 		<input type="text" class="form-control" name="apellido2" required>
 	</div>
 
@@ -47,18 +47,18 @@
 	</div>
 
 	<div class="mb-3">
-		<label for="idioma">Language</label>
+		<label for="idioma">Idiomas</label>
         <select class="form-select" multiple name="idioma[]" required>
-            <option value="SPA" selected>Spanish</option>
-            <option value="ENG">English</option>
-			<option value="FRA">French</option>
-			<option value="DEU">Deutsch</option>
-			<option value="ITA">Italian</option>
+            <option value="SPA" selected>Español</option>
+            <option value="ENG">Inglés</option>
+			<option value="FRA">Francés</option>
+			<option value="DEU">Alemán</option>
+			<option value="ITA">Italiano</option>
         </select>
     </div>
 
 	<div class="mb-3">
-		<label for="cumple">Birthdate</label>
+		<label for="cumple">Cumpleaños</label>
 		<input type="date" class="form-control" name="cumple" required>
 	</div>
 
