@@ -75,24 +75,6 @@ if(!isset($_SESSION["loggedin"])){
           </div>
         </div>
   
-        <!-- The Contact Section -->
-    <div class="w3-container w3-content" style="max-width:390px" id="contact">
-      <h5 class="w3-center">Get in touch.</h5>
-      <div class="w3-row w3-padding-32">
-        <div class="w3-col m12 w3-large w3-margin-bottom">
-          <i class="fa fa-map-marker" style="width:30px"></i> London, UK<br>
-          <i class="fa fa-phone" style="width:30px"></i> Phone: +44 151515<br>
-          <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
-        </div>
-      </div>
-      <!-- Footer. This section contains an ad for W3Schools Spaces. You can leave it to support us. -->
-      <footer class="w3-container w3-center w3-padding-48">
-        <a class="w3-margin-bottom" href="https://www.w3schools.com/spaces" title="This website was made with W3schools Spaces. Make your own free website today!" target="_blank">
-          <img src="https://spaces.w3schools.com/logo_4x.png" alt="This website was made with W3schools Spaces. Make your own free website today!" width="50" height="50">
-        </a> 
-      <!-- End footer -->
-      </footer>
-    </div>
   
     </body>  
   </html>
